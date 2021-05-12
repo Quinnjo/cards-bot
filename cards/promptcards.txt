@@ -1,4 +1,0 @@
-Prompt [blank] 1
-[blank] Prompt 2
-Prompt 3 [blank]
-[blank] Prompt 4 [blank]
