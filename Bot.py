@@ -1,3 +1,4 @@
+import discord
 from discord.ext import commands
 from Game import Game, Round
 from GameObjects import Player, Card, Prompt
@@ -81,7 +82,7 @@ async def begin(ctx):
         # wait for the judge to make a choice
         try:
             await asyncio.wait_for(judge_has_chosen(), timeout=180.0) # The judge has 3 minutes to pick a card
-        except: asyncio.TimeoutError:
+        except asyncio.TimeoutError:
             await ctx.send("The judge did not choose a card")
             continue
         # award points
@@ -116,7 +117,7 @@ async def is_judge(ctx):
     return ctx.author == current_judge
 
 @bot.command()
-@comands.check(is_judge) # only allow if the user is the judge
+@commands.check(is_judge) # only allow if the user is the judge
 async def judge(ctx, number):
     if not isinstance(number, int):
         ctx.send('Please use $judge with the *number* of your desired card')
