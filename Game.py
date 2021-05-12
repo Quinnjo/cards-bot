@@ -10,7 +10,7 @@ class Game:
         self.started = False
     
     def start(self):
-        self.started = true
+        self.started = True
 
     def add_player(self, player):
         self.players.append(player)
@@ -26,10 +26,10 @@ class Game:
 
     # adds the list cards to the card deck
     def add_to_card_deck(self, cards):
-        self.card_deck.append(cards)
+        self.card_deck.extend(cards)
 
     def add_to_prompt_deck(self, prompts):
-        self.prompt_deck.append(prompts)
+        self.prompt_deck.extend(prompts)
 
     # deals num cards to player, default is 1
     def deal_to(self, player, num = 1):
@@ -38,7 +38,7 @@ class Game:
     
     # deals num cards to all players, default is 1
     def deal_to_all(self, num = 1):
-        for player in players:
+        for player in self.players:
             self.deal_to(player, num)
 
     # returns a prompt off the top of the deck
@@ -66,7 +66,7 @@ class Game:
 class Round:
     def __init__(self, prompt, game):
         self.prompt = prompt
-        self.played_cards = list()
+        self.played_cards = list() # A list of lists
         self.game = game
     
     def add_to_played_cards(self, card):
@@ -78,9 +78,9 @@ class Round:
         random.seed()
         random.shuffle(self.played_cards)
 
-    # returns true if every player (minus the judge) has played a card
+    # returns true if every player (minus the judge) has played a card (or the necessary number of cards)
     def is_ready(self):
-        return len(self.get_played_cards) == len(game.players) - 1
+        return len(self.get_played_cards) == len(self.game.players) - 1
     
     def get_played_cards(self):
         return self.played_cards

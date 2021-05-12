@@ -36,13 +36,18 @@ class Card:
 # Needs a standard character that represents a blank
 # If I store all of the cards in a text file, I will need a character/string to represent a blank
 class Prompt(Card):
-    def __init__(self, prompt, num_blanks):
+    def __init__(self, prompt, num_blanks, has_judge):
         self.number_of_blanks = num_blanks
+        self.judge = has_judge
         super().__init__(prompt)
     
+    # Returns the string representation of the card
     def __str__(self):
         return "Prompt: {}".format(super().__str__())
 
+    # Returns the string representation with the given judge name
+    def with_judge(self, name):
+        return str(self).replace('[judge]',name)
 
     
 
